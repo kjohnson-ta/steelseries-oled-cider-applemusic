@@ -21,7 +21,7 @@ class DataFetcher() {
     private var iTunesIsRunning = false
     private var iTunes: ActiveXComponent? = null
     private var iTunesTimeout = 0
-    private val players = "(Spotify|MusicBee|AIMP|YouTube Music Desktop App|TIDAL|Qobuz|AppleMusic).exe".toRegex()
+    private val players = "(Spotify|MusicBee|AIMP|YouTube Music Desktop App|TIDAL|Qobuz).exe".toRegex()
 
     fun getCurrentSong(): String? {
         return arrayOf(
@@ -49,33 +49,13 @@ class DataFetcher() {
                 val title = CharArray(titleLength)
                 User32.INSTANCE.GetWindowText(hwnd, title, titleLength)
                 val wText = Native.toString(title)
-                
-                // Debug: log all Apple Music windows
-                if (processPath.endsWith("AppleMusic.exe")) {
-                    println("Apple Music Window: '$wText'")
-                }
                 if (wText.contains("MediaPlayer SMTC")) {
-                    // Handle SMTC (System Media Transport Controls) windows for Apple Music and other apps
-                    if (processPath.endsWith("AppleMusic.exe")) {
-                        // Debug: print what we're getting from SMTC windows
-                        println("Apple Music SMTC Window: '$wText'")
-                        if (wText.contains(" - ") && !wText.contains("{") && wText.length > 20) {
-                            song = wText.replace("MediaPlayer SMTC", "").trim()
-                            println("Extracted song: '$song'")
-                            return@WNDENUMPROC true
-                        }
-                    }
                     return@WNDENUMPROC true
                 }
                 if (wText.contains(" - ")) {
                     song = wText.replace(" - MusicBee", "")
                     if (processPath.endsWith("TIDAL.exe")) {
                         song = "${song.split(" - ")[1]} - ${song.split(" - ")[0]}"
-                    }
-                    if (processPath.endsWith("AppleMusic.exe")) {
-                        // Apple Music window title format: "Song Name - Artist Name - Apple Music"
-                        // Remove "- Apple Music" suffix if present
-                        song = song.replace(" - Apple Music", "")
                     }
                 }
             }
