@@ -49,11 +49,21 @@ class DataFetcher() {
                 val title = CharArray(titleLength)
                 User32.INSTANCE.GetWindowText(hwnd, title, titleLength)
                 val wText = Native.toString(title)
+                
+                // Debug: log all Apple Music windows
+                if (processPath.endsWith("AppleMusic.exe")) {
+                    println("Apple Music Window: '$wText'")
+                }
                 if (wText.contains("MediaPlayer SMTC")) {
                     // Handle SMTC (System Media Transport Controls) windows for Apple Music and other apps
-                    if (processPath.endsWith("AppleMusic.exe") && wText.contains(" - ")) {
-                        song = wText.replace("MediaPlayer SMTC", "").trim()
-                        return@WNDENUMPROC true
+                    if (processPath.endsWith("AppleMusic.exe")) {
+                        // Debug: print what we're getting from SMTC windows
+                        println("Apple Music SMTC Window: '$wText'")
+                        if (wText.contains(" - ") && !wText.contains("{") && wText.length > 20) {
+                            song = wText.replace("MediaPlayer SMTC", "").trim()
+                            println("Extracted song: '$song'")
+                            return@WNDENUMPROC true
+                        }
                     }
                     return@WNDENUMPROC true
                 }
