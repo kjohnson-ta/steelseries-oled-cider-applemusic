@@ -21,7 +21,7 @@ class DataFetcher() {
     private var iTunesIsRunning = false
     private var iTunes: ActiveXComponent? = null
     private var iTunesTimeout = 0
-    private val players = "(Spotify|MusicBee|AIMP|YouTube Music Desktop App|TIDAL|Qobuz).exe".toRegex()
+    private val players = "(Spotify|MusicBee|AIMP|YouTube Music Desktop App|TIDAL|Qobuz|AppleMusic).exe".toRegex()
 
     fun getCurrentSong(): String? {
         return arrayOf(
@@ -56,6 +56,11 @@ class DataFetcher() {
                     song = wText.replace(" - MusicBee", "")
                     if (processPath.endsWith("TIDAL.exe")) {
                         song = "${song.split(" - ")[1]} - ${song.split(" - ")[0]}"
+                    }
+                    if (processPath.endsWith("AppleMusic.exe")) {
+                        // Apple Music window title format: "Song Name - Artist Name - Apple Music"
+                        // Remove "- Apple Music" suffix if present
+                        song = song.replace(" - Apple Music", "")
                     }
                 }
             }

@@ -10,6 +10,7 @@ This programs adds the following to your SteelSeries OLED screen:
 - Now playing artist and song for:
   - Spotify
   - iTunes
+  - Apple Music
   - Qobuz
   - [TIDAL](https://tidal.com/)
   - [MusicBee](https://getmusicbee.com/)
