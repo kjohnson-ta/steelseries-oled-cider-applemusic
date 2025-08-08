@@ -1,7 +1,5 @@
 fork of https://github.com/mtricht/gamesense-essentials purely for https://cider.sh/ (Version 3)
 
-check out `apple-music-support` branch 
-
 ```
 in powershell
 
