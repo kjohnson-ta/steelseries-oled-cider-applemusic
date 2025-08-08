@@ -50,6 +50,11 @@ class DataFetcher() {
                 User32.INSTANCE.GetWindowText(hwnd, title, titleLength)
                 val wText = Native.toString(title)
                 if (wText.contains("MediaPlayer SMTC")) {
+                    // Handle SMTC (System Media Transport Controls) windows for Apple Music and other apps
+                    if (processPath.endsWith("AppleMusic.exe") && wText.contains(" - ")) {
+                        song = wText.replace("MediaPlayer SMTC", "").trim()
+                        return@WNDENUMPROC true
+                    }
                     return@WNDENUMPROC true
                 }
                 if (wText.contains(" - ")) {
