@@ -1,28 +1,14 @@
-# gamesense-essentials
-[![Downloads](https://img.shields.io/github/downloads/mtricht/gamesense-essentials/total.svg)](https://github.com/mtricht/gamesense-essentials/releases)
+fork of https://github.com/mtricht/gamesense-essentials purely for https://cider.sh/ (Version 3)
 
-Essential OLED integrations for SteelSeries GG.
+check out `apple-music-support` branch 
 
-This programs adds the following to your SteelSeries OLED screen:
+```
+in powershell
 
-- Clock
-- Volume slider
-- Now playing artist and song for:
-  - Spotify
-  - iTunes
-  - [Cider](https://cider.sh/) (Apple Music client)
-  - Qobuz
-  - [TIDAL](https://tidal.com/)
-  - [MusicBee](https://getmusicbee.com/)
-  - [AIMP](https://www.aimp.ru/) 
-  - [th-ch's Youtube Music Desktop App](https://th-ch.github.io/youtube-music/)  
-    Make sure the API server plugin is enabled, running on port 26538 and without authentication.
-  - [YouTube Music Desktop App](https://ytmdesktop.app/)
+./gradlew.bat build
+./gradlew.bat run
+```
 
-[Download for Windows](https://github.com/mtricht/gamesense-essentials/releases/download/1.15.0/gamesense-essentials-1.15.0.msi)  
-
-## Demo
-https://user-images.githubusercontent.com/7511094/122837368-3e0fad00-d2f4-11eb-868e-980b2b29e1c1.mp4
-
-## Run on windows startup
-To run after boot, create a shortcut to gamesense-essentials inside the "Startup" folder. Follow this [tutorial](https://www.howtogeek.com/208224/how-to-add-a-program-to-startup-in-windows/) if you're having trouble.
+todo:
+add to msi package
+look back into Apple music support as of now too painful re: https://github.com/kjohnson-ta/steelseries-oled-cider-applemusic/commit/c9496a3c05e66a2f49795d00a2701ac69bf7c684
